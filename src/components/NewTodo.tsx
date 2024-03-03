@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import classes from "./NewTodo.module.css";
+import { TodoContext } from "../store/todo-context";
 
-const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
+const NewTodo: React.FC = () => {
   const todoInputTextRef = useRef<HTMLInputElement>(null);
+  const todosCtx = useContext(TodoContext);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -13,7 +15,7 @@ const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
       return;
     }
 
-    props.onAddTodo(enteredText);
+    todosCtx.addTodo(enteredText);
   };
 
   return (
